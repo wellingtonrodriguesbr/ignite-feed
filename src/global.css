@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--green-500);
+}
+
 :root {
   --white: #fff;
   --gray-100: #e1e1e6;
@@ -15,6 +20,7 @@
   --gray-900: #121214;
   --green-300: #00b37e;
   --green-500: #00875f;
+  --red-500: #f75a68;
 }
 
 body {
