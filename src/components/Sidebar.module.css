@@ -61,3 +61,10 @@
   background-color: var(--green-500);
   color: var(--white);
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+}

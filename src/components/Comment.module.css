@@ -72,3 +72,14 @@
 .commentBox footer button:hover {
   color: var(--green-300);
 }
+
+@media (max-width: 768px) {
+  .comment {
+    flex-direction: column;
+  }
+
+  .commentContent header {
+    display: grid !important ;
+    grid-template-columns: 1fr auto;
+  }
+}
