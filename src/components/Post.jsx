@@ -3,8 +3,18 @@ import { Comment } from "./Comment";
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/esm/locale/pt-BR";
 import styles from "./Post.module.css";
+import { useState } from "react";
 
 export function Post() {
+  const [comment, setComment] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  function handleCreateNewComment(e) {
+    e.preventDefault();
+    setComment([...comment, newComment]);
+    setNewComment("");
+  }
+
   return (
     <>
       {posts.map((post) => (
@@ -33,6 +43,7 @@ export function Post() {
               })}
             </time>
           </header>
+
           <div className={styles.content}>
             <p>{post.content.title}</p>
             <p>{post.content.description}</p>
@@ -52,17 +63,25 @@ export function Post() {
             </p>
           </div>
 
-          <form className={styles.commentForm}>
+          <form
+            onSubmit={handleCreateNewComment}
+            className={styles.commentForm}
+          >
             <strong>Deixe seu feedback</strong>
-            <textarea placeholder="Escreva um comentário..." />
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Escreva um comentário..."
+            />
             <footer>
               <button type="submit">Publicar</button>
             </footer>
           </form>
-
-          <div className={styles.commentList}>
-            <Comment />
-          </div>
+          {comment.map((comment) => (
+            <div className={styles.commentList} key={comment}>
+              <Comment comment={comment} />
+            </div>
+          ))}
         </article>
       ))}
     </>
