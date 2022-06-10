@@ -6,13 +6,29 @@ import styles from "./Post.module.css";
 import { useState } from "react";
 
 export function Post() {
-  const [comment, setComment] = useState([]);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  function handleCreateNewComment(e) {
-    e.preventDefault();
-    setComment([...comment, newComment]);
+  function handleCreateNewComment() {
+    event.preventDefault();
+    setComments([...comments, newComment]);
     setNewComment("");
+  }
+
+  function handleNewCommentChange() {
+    event.target.setCustomValidity("");
+    setNewComment(event.target.value);
+  }
+
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment !== commentToDelete
+    );
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity("Esse campo é obrigatório");
   }
 
   return (
@@ -70,16 +86,20 @@ export function Post() {
             <strong>Deixe seu feedback</strong>
             <textarea
               value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
               placeholder="Escreva um comentário..."
+              onChange={handleNewCommentChange}
+              onInvalid={handleNewCommentInvalid}
+              required
             />
             <footer>
-              <button type="submit">Publicar</button>
+              <button type="submit" disabled={!newComment}>
+                Publicar
+              </button>
             </footer>
           </form>
-          {comment.map((comment) => (
+          {comments.map((comment) => (
             <div className={styles.commentList} key={comment}>
-              <Comment comment={comment} />
+              <Comment comment={comment} onDelete={deleteComment} />
             </div>
           ))}
         </article>
