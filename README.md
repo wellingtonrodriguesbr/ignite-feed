@@ -16,7 +16,6 @@
 
 - [Vite](https://vitejs.dev/)
 - [ReactJs](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
 - [Css Modules](https://github.com/css-modules/css-modules)
 
 ## Como baixar o projeto
